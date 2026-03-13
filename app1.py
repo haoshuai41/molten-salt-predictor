@@ -334,36 +334,36 @@ class MoltenSaltPredictorApp:
                         st.markdown('<div class="sub-header">📊 预测结果</div>', unsafe_allow_html=True)
 
                     
-                    # 显示预测结果
-                    cols = st.columns(4)
-                    property_display_names = {
-                        'density': '密度',
-                        'heat_capacity': '比热容',
-                        'viscosity': '粘度',
-                        'thermal_conductivity': '热导率'
-                    }
-                    
-                    property_icons = {
-                        'density': '⚖️',
-                        'heat_capacity': '🔥',
-                        'viscosity': '💧',
-                        'thermal_conductivity': '📈'
-                    }
-                    
-                    for idx, (prop_name, value) in enumerate(predictions.items()):
-                        with cols[idx]:
-                            unit = self.property_units.get(prop_name, '')
-                            icon = property_icons.get(prop_name, '📊')
-                            display_name = property_display_names.get(prop_name, prop_name)
-                            
-                            if value is not None:
-                                st.markdown(f'<div class="property-card">', unsafe_allow_html=True)
-                                st.metric(
-                                    f"{icon} {display_name}",
-                                    f"{value:.2f} {unit}",
-                                    delta=f"±{uncertainties.get(prop_name, 0):.2f}" if prop_name in uncertainties else None
-                                )
-                                st.markdown(f'</div>', unsafe_allow_html=True)
+                        # 显示预测结果
+                        cols = st.columns(4)
+                        property_display_names = {
+                            'density': '密度',
+                            'heat_capacity': '比热容',
+                            'viscosity': '粘度',
+                            'thermal_conductivity': '热导率'
+                        }
+                        
+                        property_icons = {
+                            'density': '⚖️',
+                            'heat_capacity': '🔥',
+                            'viscosity': '💧',
+                            'thermal_conductivity': '📈'
+                        }
+                        
+                        for idx, (prop_name, value) in enumerate(predictions.items()):
+                            with cols[idx]:
+                                unit = self.property_units.get(prop_name, '')
+                                icon = property_icons.get(prop_name, '📊')
+                                display_name = property_display_names.get(prop_name, prop_name)
+                                
+                                if value is not None:
+                                    st.markdown(f'<div class="property-card">', unsafe_allow_html=True)
+                                    st.metric(
+                                        f"{icon} {display_name}",
+                                        f"{value:.2f} {unit}",
+                                        delta=f"±{uncertainties.get(prop_name, 0):.2f}" if prop_name in uncertainties else None
+                                    )
+                                    st.markdown(f'</div>', unsafe_allow_html=True)
                     
         
         # 侧边栏信息
@@ -407,4 +407,5 @@ class MoltenSaltPredictorApp:
 # 运行应用
 if __name__ == "__main__":
     app = MoltenSaltPredictorApp()
+
     app.run()

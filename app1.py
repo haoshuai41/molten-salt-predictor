@@ -80,12 +80,12 @@ class MoltenSaltPredictorApp:
         try:
             # 加载每个属性的模型
             for prop_name in self.property_names:
-                model_path = f'models/{prop_name}_model.joblib'
+                model_path = f'{prop_name}_model.joblib'
                 if os.path.exists(model_path):
                     self.models[prop_name] = joblib.load(model_path)
             
             # 加载模型信息
-            info_path = 'models/model_info.joblib'
+            info_path = 'model_info.joblib'
             if os.path.exists(info_path):
                 info = joblib.load(info_path)
                 self.model_info = info.get('model_info', {})
@@ -409,3 +409,4 @@ if __name__ == "__main__":
     app = MoltenSaltPredictorApp()
 
     app.run()
+
